@@ -9,8 +9,11 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+    
     <title>Restaurant Management System</title>
 </head>
 
@@ -46,10 +49,10 @@
 	</div>
 
 	<div class="col-3 col-md-3">
-	<h1> Total:
+	<h1> Total: <div id=total_price></div>
 	</h1>
-	<a href="#">
-	<h5 style="text-align: right; width: 100%">Order</h5></a>
+	<button onclick="sendOrder()">
+	<h5 style="text-align: right; width: 100%">Order</h5></button>
     <table class="table table-sm" style="width: 100%" id=name>
         <tr>
             <th>Name</th>
@@ -61,10 +64,33 @@
 	</div>
 
     <script type="text/javascript">
+    total_price = 0
+    ordered_item = {'name':[], 'price':[]}
+        
         function add(name, price) {
+            // initialialize json varible for storing order
+
+            ordered_item['name'].push(name);
+            ordered_item['price'].push(price);
+
+            total_price += parseInt(price)
             $("#name").append(
                 '<tr scope="row"><td>' + name + '</td><td style="width: 10px; text-align: right;">' + price + '</td></tr>'
             );
+            document.getElementById("total_price").innerHTML = total_price;
+        }
+
+        function sendOrder()
+        {
+            $.ajax({
+                type: 'POST',
+                url: '',
+                data: JSON.stringify(ordered_item),
+                success: function(data)
+                {
+                    console.log("ordered vayo")
+                }
+            })
         }
     </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
