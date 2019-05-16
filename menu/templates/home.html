@@ -24,27 +24,30 @@
     	<h1>Menu</h1>
     	<div class="row">
    	
-
     <div class="col-8 col-md-8">
-    <table class="table table-sm">
+    {% for food_type in Foodtype %}
+        <h1>{{ food_type.food_type }}</h1>
+        <table class="table table-sm">
+        <tr>
+        </tr>    
         <tr>
             <th scope="col" width="1">Item</th>
             <th scope="col" width="4">Name</th>
             <th scope="col" width="2">Price</th>
         </tr>
-
-
-	    {% if Food %}
-	        {% for things in Food %}
-	        <tr class="list-group-item-action" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}', '{{ things.foodtype }}' )">
-	            <td>{{ things.name }}</td>
-	            <td>{{ things.food_type }}</td>
-	            <td>{{ things.price }}</td>
-	            </td>
-	        </tr>
-	        {% endfor %}
-	    {% endif %}
+        {% for food_s in Food %}
+        
+        {% if food_s.food_type is food_type.food_type %}
+        <tr>
+                <th scope="col" width="1">{{ food_s.id}} </th>
+                <th scope="col" width="4">{{ food_s.name}}</th>
+                <th scope="col" width="2">{{ food_s.price }}</th>
+            </tr>
+            {% endif %}
+        {% endfor %}
     </table>
+
+    {% endfor %}
 	</div>
 	<div class="col-1 col-md-1">
 	</div>
@@ -81,6 +84,8 @@
             );
             document.getElementById("total_price").innerHTML = total_price;
         }
+
+
 
         function sendOrder()
         {
