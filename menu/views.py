@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import FoodItem, Order, OrderedItem, CustomUser
+from .models import FoodType, FoodItem, Order, OrderedItem, CustomUser
 import json
 
 def home(request):
@@ -17,5 +17,6 @@ def home(request):
 
 		return HttpResponse("Ordered vayo vai")
 	else:
-		all_items= FoodItem.objects.all
-		return render(request, 'home.html', {'all_items': all_items})
+		Food = FoodItem.objects.all
+		Foodtype = FoodType.objects.all
+		return render(request, 'home.html', {'Food': Food, 'Foodtype': Foodtype})

@@ -32,14 +32,18 @@
             <th scope="col" width="4">Name</th>
             <th scope="col" width="2">Price</th>
         </tr>
-        {% if all_items %} {% for things in all_items %}
-        <tr class="list-group-item-action" scope="row" onclick="add('{{ things.item_name }}', '{{  things.price }}', '{{ things.item_id }}' )">
-            <td>{{ things.item_id }}</td>
-            <td>{{ things.item_name }}</td>
-            <td>{{ things.price }}</td>
-            </td>
-        </tr>
-        {% endfor %} {% endif %}
+
+
+	    {% if Food %}
+	        {% for things in Food %}
+	        <tr class="list-group-item-action" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}', '{{ things.foodtype }}' )">
+	            <td>{{ things.name }}</td>
+	            <td>{{ things.food_type }}</td>
+	            <td>{{ things.price }}</td>
+	            </td>
+	        </tr>
+	        {% endfor %}
+	    {% endif %}
     </table>
 	</div>
 	<div class="col-1 col-md-1">
