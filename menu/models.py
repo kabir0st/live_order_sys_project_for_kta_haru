@@ -1,17 +1,17 @@
 from django.db import models
 
 class Menu(models.Model):
-	item_id = models.IntegerField()
-	item_name = models.CharField(max_length=50)
-	price = models.FloatField(max_length=50)
+	food_item = models.CharField(max_length=50)
+	active = models.BooleanField(default=True)
 
 	def __str__(self):
 		return self.item_name + ' - ' + str(self.price)
 
 class Order(models.Model):
-	item_id = models.IntegerField()
-	item_name = models.CharField(max_length=50)
-	price = models.FloatField(max_length=50)
-	
+	table = models.ForeignKey(User,on_delete=models.CASCADE)
+	food_item = models.CharField(max_length=50)
+	Total_price = models.IntegerField()
+
 	def __str__(self):
 		return self.item_name + ' - ' + str(self.price)
+
