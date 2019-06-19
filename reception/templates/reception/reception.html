@@ -26,11 +26,10 @@
         <tr>
             <th>{{ name }}</th>
             
-            <!-- <th>{{ order.price[0] }}</th> -->
         </tr>
         {% endfor %}
     </table>
-    <button onclick="done('{{ order.id }}')">Done</button>
+    <a href="/reception/{{order.id}}">Done</a>
     {% endfor %}
     <!-- <table class="table table-sm">
         <tr>
