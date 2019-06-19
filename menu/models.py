@@ -20,6 +20,9 @@ class FoodItem(models.Model):
 	price = models.PositiveIntegerField(default = 100)
 	is_active = models.BooleanField(default= True)
 
+	def __str__(self):
+		return self.name
+
 class Order(models.Model):
 	is_done = models.BooleanField(default=False)
 	timestamp = models.DateTimeField(default=timezone.now)
