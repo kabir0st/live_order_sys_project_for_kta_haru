@@ -8,7 +8,7 @@ def get_order(request):
     response = {'order':[]}
     for order in orders:
         ordered_items = OrderedItem.objects.all().filter(order = order)
-        json_order = {'name':[],'price':[]}
+        json_order = {'name':[],'price':[],'id':order.id}
         for ordered_item in ordered_items:
             json_order['name'].append(ordered_item.food_item.name)
             json_order['price'].append(ordered_item.food_item.price)

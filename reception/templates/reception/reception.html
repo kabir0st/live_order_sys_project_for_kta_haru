@@ -18,17 +18,19 @@
 
 <h1></h1>
 
-{{ orders }}
 <div class="col-8 col-md-8">
     {% for order in orders.order %}
-
+    <h1>{{ order.id }}</h1>
     <table>
+        {% for name in order.name %}
         <tr>
-            <td>{{ order.name }}</td>
+            <th>{{ name }}</th>
             
-            <td>{{ order.price }}</td>
+            <!-- <th>{{ order.price[0] }}</th> -->
         </tr>
+        {% endfor %}
     </table>
+    <button onclick="done('{{ order.id }}')">Done</button>
     {% endfor %}
     <!-- <table class="table table-sm">
         <tr>
@@ -47,5 +49,10 @@
 </body>
 
 <script>
+
+function done(order_id)
+{
+    
+}
 
 </script>
