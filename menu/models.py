@@ -27,14 +27,8 @@ class FoodItem(models.Model):
 		return self.name +' | ' + self.food_type.food_type + ' | ' + str(self.price) + ' | ' + str(self.is_active)
 
 class Order(models.Model):
-	STATES = (
-		('PAID', "Paid"),
-		('PENDING', "Pending")
-	)
-	state = models.CharField(max_length=8, choices=STATES, default='PENDING')
 	timestamp = models.DateTimeField(default=timezone.now)
-	table_number = models.PositiveIntegerField(null = True)
-
+	
 	def __str__(self):
 		return str(self.table_number) + ' | ' + self.state
 

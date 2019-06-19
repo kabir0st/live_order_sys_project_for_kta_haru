@@ -23,41 +23,32 @@
     <div class="container">
     	<h1>Menu</h1>
     	<div class="row">
-   	
+
+
     <div class="col-8 col-md-8">
-    {% for food_type in Foodtype %}
-        <h1>{{ food_type.food_type }}</h1>
-        <table class="table table-sm">
+    <table class="table table-sm">
         <tr>
-        </tr>    
-        <tr>
-            <th scope="col" width="1">Item</th>
             <th scope="col" width="4">Name</th>
             <th scope="col" width="2">Price</th>
         </tr>
-        {% for food_s in Food %}
-        
-        {% if food_s.food_type is food_type.food_type %}
-        <tr>
-                <th scope="col" width="1">{{ food_s.id}} </th>
-                <th scope="col" width="4">{{ food_s.name}}</th>
-                <th scope="col" width="2">{{ food_s.price }}</th>
-            </tr>
-            {% endif %}
-        {% endfor %}
+        {% if Food %} {% for things in Food %}
+        <tr class="list-group-item-action" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}' )">
+            <td>{{ things.name }}</td>
+            <td>{{ things.price }}</td>
+            </td>
+        </tr>
+        {% endfor %} {% endif %}
     </table>
-
-    {% endfor %}
 	</div>
 	<div class="col-1 col-md-1">
 	</div>
 
 	<div class="col-3 col-md-3">
-	<h1> Total: <div id=total_price></div>
+	<h1 id="total_price" > Total:
 	</h1>
 	<button onclick="sendOrder()">
 	<h5 style="text-align: right; width: 100%">Order</h5></button>
-    <table class="table table-sm" style="width: 100%" id=name>
+    <table class="table table-sm" style="width: 100%" id="name">
         <tr>
             <th>Name</th>
             <th style="width: 10px; text-align: right;">Price</th>
@@ -67,28 +58,27 @@
     </div>
 	</div>
 
+
     <script type="text/javascript">
     total_price = 0
-    ordered_item = {'name':[], 'price':[], 'id':[] }
+    ordered_item = {'name':[], 'price':[] }
+
         
         function add(name, price, id) {
-            // initialialize json varible for storing order
-
             ordered_item['name'].push(name);
             ordered_item['price'].push(price);
-            ordered_item['id'].push(id);
-
+            console.log(name)
             total_price += parseInt(price)
             $("#name").append(
                 '<tr scope="row"><td>' + name + '</td><td style="width: 10px; text-align: right;">' + price + '</td></tr>'
             );
             document.getElementById("total_price").innerHTML = total_price;
         }
-
-
+        
 
         function sendOrder()
         {
+            console.log(ordered_item)
             $.ajax({
                 type: 'POST',
                 url: '',

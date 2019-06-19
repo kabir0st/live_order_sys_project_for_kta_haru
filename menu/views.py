@@ -8,15 +8,14 @@ def home(request):
 		json_str = request.body.decode(encoding= 'UTF-8')
 		data = json.loads(json_str)
 		names = data['name']
-		prices = data['price']
-		ids = data['id']
+		order = Order.objects.create()
 		for i in range(len(names)):
-			order = Order.objects.create(item_id = ids[i], item_name = names[i], price = prices[i])
-			order.save()
-
-
+			item = FoodItem.objects.get(name = names[i])
+			order_items = OrderedItem.objects.create(order = order, food_item = item)
+			order_items.save()
 		return HttpResponse("Ordered vayo vai")
 	else:
 		Food = FoodItem.objects.all
 		Foodtype = FoodType.objects.all
 		return render(request, 'home.html', {'Food': Food, 'Foodtype': Foodtype})
+
