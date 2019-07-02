@@ -1,62 +1,155 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
-    <title>Restaurant Management System</title>
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#" style="text-align: center; width: 100%">The Restaurant</a>
-        </div>
-    </nav>
-
-    <div class="container">
-    	<h1>Menu</h1>
-    	<div class="row">
+{% extends 'base.html' %}
 
 
-    <div class="col-8 col-md-8">
+{% block content %}
+    <div class="d-none d-lg-block sidebar-item make-me-sticky col-lg-3 col-md-3 text-white" id="sticky-sidebar">
+        <ul style="list-style-type:none;padding-top: 80px; padding-bottom: 60px" class="text-left">
+          <li><a href="#stealthedeal" class="js-scroll-trigger">Steal the Deal</a></li>
+          <li><a href="#salad"  class="js-scroll-trigger">Salad</a></li>
+          <li><a href="#cornerbites"  class="js-scroll-trigger">Corner Bites</a></li>
+          <li><a href="#mcf"  class="js-scroll-trigger">Mo:Mo / Chowmein & Fired Rice</a></li>
+          <li><a href="#indiantadka"  class="js-scroll-trigger">Indian Tadka</a></li>
+          <li><a href="#pasta"  class="js-scroll-trigger">Pasta</a></li>
+          <li><a href="#pizza"  class="js-scroll-trigger">Pizza</a></li>
+          <li><a href="#bursand"  class="js-scroll-trigger">Burger / Sandwich</a></li>
+        </ul>
+    </div>
+    <div class="content section col-lg-6 col-md-6" id="main">
+    <section id="stealthedeal">
     <table class="table table-sm">
-        <tr>
-            <th scope="col" width="4">Name</th>
-            <th scope="col" width="2">Price</th>
-        </tr>
-        {% if Food %} {% for things in Food %}
-        <tr class="list-group-item-action" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}' )">
+       {% if stealthedeal %}
+       <tr>
+           <th class="text-white" colspan="2">Steal the Deal</th>
+       </tr>
+        {% for things in stealthedeal %}
+        <tr class="list-group-item-action text-white text-left" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}' )">
             <td>{{ things.name }}</td>
-            <td>{{ things.price }}</td>
-            </td>
+            <td class="text-right">Rs.{{ things.price }}</td>
         </tr>
-        {% endfor %} {% endif %}
+        {% endfor %}{% endif %}
     </table>
-	</div>
-	<div class="col-1 col-md-1">
-	</div>
+    <br><br>
+    </section>
+    <section id="salad">
+    <table class="table table-sm" style="color: white">
+       {% if salad %}
+       <tr>
+           <th class="text-white" colspan="2">Salad</th>
+       </tr>
+        {% for things in salad %}
+        <tr class="list-group-item-action text-white text-left" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}' )">
+            <td>{{ things.name }}</td>
+            <td class="text-right">Rs.{{ things.price }}</td>
+        </tr>
+        {% endfor %}{% endif %}
+    </table>
+    <br><br>
+    </section>
+    <section id="cornerbites">
+    <table class="table table-sm " style="color: white">
+       {% if cornerbites %}
+       <tr>
+           <th class="text-white" colspan="2">Corner Bites</th>
+       </tr>
+        {% for things in cornerbites %}
+        <tr class="list-group-item-action text-white text-left" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}' )">
+            <td>{{ things.name }}</td>
+            <td class="text-right">Rs.{{ things.price }}</td>
+        </tr>
+        {% endfor %}{% endif %}
+    </table>
+    <br><br>
+    </section>
+    <section id="mcf">
+    <table class="table table-sm " style="color: white">
+       {% if mcf %}
+       <tr>
+           <th class="text-white" colspan="2">Mo:Mo / Chowmein & Fired Rice</th>
+       </tr>
+        {% for things in mcf %}
+        <tr class="list-group-item-action text-white text-left" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}' )">
+            <td>{{ things.name }}</td>
+            <td class="text-right">Rs.{{ things.price }}</td>
+        </tr>
+        {% endfor %}{% endif %}
+    </table>
+    <br><br>
+    </section>
 
-	<div class="col-3 col-md-3">
-	<h1 id="total_price" > Total:
-	</h1>
-	<button onclick="sendOrder()">
-	<h5 style="text-align: right; width: 100%">Order</h5></button>
-    <table class="table table-sm" style="width: 100%" id="name">
+    <section id="indiantadka">
+        <table class="table table-sm " style="color: white">
+       {% if indiantadka %}
+       <tr>
+           <th class="text-white" colspan="2">Indian Tadka</th>
+       </tr>
+        {% for things in indiantadka %}
+        <tr class="list-group-item-action text-white text-left" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}' )">
+            <td>{{ things.name }}</td>
+            <td class="text-right">Rs.{{ things.price }}</td>
+        </tr>
+        {% endfor %}{% endif %}
+    </table>
+    <br><br>
+    </section>
+    <section id="pasta">
+    <table class="table table-sm " style="color: white">
+       {% if pasta %}
+       <tr>
+           <th class="text-white" colspan="2">Pasta</th>
+       </tr>
+        {% for things in pasta %}
+        <tr class="list-group-item-action text-white text-left" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}' )">
+            <td>{{ things.name }}</td>
+            <td class="text-right">Rs.{{ things.price }}</td>
+        </tr>
+        {% endfor %}{% endif %}
+    </table>
+    <br><br>
+    </section>
+    <section id="pizza">
+    <table class="table table-sm " style="color: white">
+       {% if pizza %}
+       <tr>
+           <th class="text-white" colspan="2">Pizza</th>
+       </tr>
+        {% for things in pizza %}
+        <tr class="list-group-item-action text-white text-left" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}' )">
+            <td>{{ things.name }}</td>
+            <td class="text-right">Rs.{{ things.price }}</td>
+        </tr>
+        {% endfor %}{% endif %}
+    </table>
+    <br><br>
+    </section>
+    <section id="bursand">
+    <table class="table table-sm " style="color: white">
+       {% if bursand %}
+       <tr>
+           <th class="text-white" colspan="2">Burger / Sandwich</th>
+       </tr>
+        {% for things in bursand %}
+        <tr class="list-group-item-action text-white text-left" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}' )">
+            <td>{{ things.name }}</td>
+            <td class="text-right">Rs.{{ things.price }}</td>
+        </tr>
+        {% endfor %}{% endif %}
+    </table>
+    <br><br>
+    </section>
+    </div>
+
+    <div class="sidebar-item make-me-sticky col-lg-3 col-md-3">
+    <h1 id="total_price" class="text-white" style=" padding-top:150px;">
+    </h1>
+    <table class="table table-sm" id="name">
         <tr>
-            <th>Name</th>
-            <th style="width: 10px; text-align: right;">Price</th>
+            <th class="text-white text-left">Name</th>
+            <th class="text-white text-right">Price</th>
         </tr>
     </table>
+       <button onclick="sendOrder()" class="btn btn-primary" style="margin-bottom: 50px;">
+    Order</button>
     </div>
-    </div>
-	</div>
 
 
     <script type="text/javascript">
@@ -70,7 +163,7 @@
             console.log(name)
             total_price += parseInt(price)
             $("#name").append(
-                '<tr scope="row"><td>' + name + '</td><td style="width: 10px; text-align: right;">' + price + '</td></tr>'
+                '<tr scope="row" class="list-group-item-action text-white text-left"><td>' + name + '</td><td style="width: 10px;" class="text-right">Rs.' + price + '</td></tr>'
             );
             document.getElementById("total_price").innerHTML = total_price;
         }
@@ -92,6 +185,16 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
 
-</html>
+    <script>
+    var closebtns = document.getElementsByClassName("close");
+    var i;
+
+    for (i = 0; i < closebtns.length; i++) {
+      closebtns[i].addEventListener("click", function() {
+        this.parentElement.style.display = 'none';
+      });
+    }
+    </script>
+</body>
+{% endblock %}

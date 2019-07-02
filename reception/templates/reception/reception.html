@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
     <title>Restaurant Management System</title>
 </head>
@@ -18,33 +19,29 @@
 
 <h1></h1>
 
-<div class="col-8 col-md-8">
+<div class="container">
     {% for order in orders.order %}
-    <h1>{{ order.id }}</h1>
-    <table>
+<div class="row">
+<div class="col-2 col-md-2">   
+    <h1 style="font-size: 100px; padding-top: 0px">{{ order.id }}</h1>
+</div>
+<div class="col-9 col-md-9" style="padding-top: 20px;">
+    <table class="table table-borderless table-sm" style="padding-top: 20px;">
         {% for name in order.name %}
-        <tr>
-            <th>{{ name }}</th>
+        <tr><td>
+            <span>{{ name }}</span>
             
-        </tr>
+         </td></tr>   
+       
         {% endfor %}
     </table>
-    <a href="/reception/{{order.id}}">Done</a>
+    <br><br><br><br>
+    </div>
+    <a href="/reception/{{order.id}}" style="font-size: 100px; color: black;">X</a>
+        
+    </div>
     {% endfor %}
-    <!-- <table class="table table-sm">
-        <tr>
-            <th scope="col" width="4">Name</th>
-            <th scope="col" width="2">Price</th>
-        </tr>
-        {% if order %} {% for things in Food %}
-        <tr class="list-group-item-action" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}' )">
-            <td>{{ things.name }}</td>
-            <td>{{ things.price }}</td>
-            </td>
-        </tr>
-        {% endfor %} {% endif %} -->
-    <!-- </table> -->
-	</div>
+    </div>
 </body>
 
 <script>
@@ -54,4 +51,21 @@ function done(order_id)
     
 }
 
+</script>
+
+<script type="text/javascript">
+    $(function(){
+  var $curParent, Content;
+  $(document).delegate("span","click", function(){
+    if($(this).closest("s").length) {
+      Content = $(this).parent("s").html();
+      $curParent = $(this).closest("s");
+      $(Content).insertAfter($curParent);
+      $(this).closest("s").remove();
+    }
+    else {
+      $(this).wrapAll("<s />");
+    }
+  });
+});
 </script>

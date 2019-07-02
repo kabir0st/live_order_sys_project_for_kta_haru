@@ -15,7 +15,15 @@ def home(request):
 			order_items.save()
 		return HttpResponse("Ordered vayo vai")
 	else:
+		stealthedeal = FoodItem.objects.filter(food_type='7')
+		salad = FoodItem.objects.filter(food_type='8')
+		cornerbites = FoodItem.objects.filter(food_type='9')
+		mcf = FoodItem.objects.filter(food_type='10')
+		indiantadka = FoodItem.objects.filter(food_type='11')
+		pasta = FoodItem.objects.filter(food_type='12')
+		pizza = FoodItem.objects.filter(food_type='13')
+		bursand = FoodItem.objects.filter(food_type='14')
 		Food = FoodItem.objects.all
 		Foodtype = FoodType.objects.all
-		return render(request, 'home.html', {'Food': Food, 'Foodtype': Foodtype})
+		return render(request, 'home.html', {'Food': Food, 'Foodtype': Foodtype, 'stealthedeal':stealthedeal, 'salad':salad, 'cornerbites':cornerbites, 'mcf':mcf, 'indiantadka':indiantadka, 'pasta':pasta, 'pizza':pizza, 'bursand':bursand})
 

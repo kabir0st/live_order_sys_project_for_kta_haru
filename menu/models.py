@@ -26,10 +26,16 @@ class FoodItem(models.Model):
 class Order(models.Model):
 	is_done = models.BooleanField(default=False)
 	timestamp = models.DateTimeField(default=timezone.now)
+
+	def __str__(self):
+		return self.timestamp
 	
 
 class OrderedItem(models.Model):
 	order = models.ForeignKey(Order,on_delete= models.CASCADE)
 	food_item = models.ForeignKey(FoodItem, on_delete = models.CASCADE)
 
+	def __str__(self):
+		return self.food_item
+	
 
