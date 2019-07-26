@@ -16,12 +16,23 @@ def home(request,table_number):
 			order_items.save()
 		return HttpResponse("Ordered vayo vai")
 	else:
-		Food = FoodItem.objects.all
-		response_json = {'food_type':[], food:[]}
-		# for ( f in Food):
+		return render(request, 'home.html')
 
-		Foodtype = FoodType.objects.all
-		return render(request, 'home.html', {'response_json': response_json})
+
+def get_menu(request):
+	Food = FoodItem.objects.all()
+	food_list = {}
+	Foodtype = FoodType.objects.all()
+	for typename in Foodtype:
+		food_list[str(typename.food_type)] = {'name':[], 'price':[]}
+	print(food_list)
+	for f in Food :
+		if(f.is_active):
+			food_list[str(f.food_type)]['name'].append(str(f.name))
+			food_list[str(f.food_type)]['price'].append(str(f.price))
+	print(food_list)
+	return HttpResponse(json.dumps(food_list), content_type = 'application/json')	
+
 
 def login_user(request):
 	if request.method == "POST":

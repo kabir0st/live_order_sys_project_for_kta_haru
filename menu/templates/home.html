@@ -51,27 +51,30 @@
     <script>
 
         $(document).ready(function () {
-        console.log("hero")
         create_menu()
         
         });
 
     total_price = 0
     ordered_item = {'name':[], 'price':[] }
+    order_item_id = 0
 
-        
-        function add(name, price, id) {
+        function add(name, price) 
+        {
             ordered_item['name'].push(name);
             ordered_item['price'].push(price);
-            console.log(name)
+            order_item_id += 1
             total_price += parseInt(price)
             $("#name").append(
-                '<tr scope="row" class="list-group-item-action text-white text-left"><td>' + name + '</td><td style="width: 10px;" class="text-right">Rs.' + price + '</td></tr>'
+                '<tr scope="row" class="list-group-item-action text-white text-left" onclick="remove('+order_item_id+')"  id = "'+order_item_id+'" ><td>' + name + '</td><td style="width: 10px;" class="text-right">Rs.' + price + '</td></tr>'
             );
             document.getElementById("total_price").innerHTML = total_price;
         }
         
-
+        function remove(order_item_id)
+        {
+            $("#"+order_item_id).remove();
+        }
         function sendOrder()
         {
             console.log(ordered_item)
@@ -88,12 +91,34 @@
 
         function create_menu()
         {
-            data = "{{ Food }}"
-            console.log("Food")
-            console.log(data)
+            $.ajax ({
+            type: 'POST',
+            url: '/get/menu',
+            data: JSON.stringify(),
+            success: function(data){
+                outputData(data);        
+            },
+            error: function(data){
+                    
+            }
+        })
+
         }
-
-
+        function outputData(data)
+        {
+            for(var food_type in data)
+            {
+                $("#main").append(
+                    "<section id='"+food_type+"'><table class='table table-sm'><tbody id='food_data_"+food_type+"'><tr><th class='text-white' colspan='2'>"+food_type+"</th></tr></tbody></table><br><br></section>"     
+                );
+                for (i=0;i <data[food_type].name.length; i++)
+                {
+                    $('#food_data_'+food_type).append(
+                    "<tr class='list-group-item-action text-white text-left' scope='row' onclick='add("+'"'+data[food_type].name[i]+'"'+","+'"'+data[food_type].price[i]+'"'+")'><td>"+data[food_type].name[i]+"</td><td class='text-right'>Rs."+data[food_type].price[i]+"</td></tr>"
+                    )
+                }
+            }
+        }
     </script>
    
 </body>

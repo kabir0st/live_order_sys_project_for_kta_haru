@@ -9,6 +9,7 @@ def get_order(request):
     for order in orders:
         json_order = {'name':[],'price':[],'id':int(order.id)}
         json_order['table_number'] = str(order.table_number)
+        json_order['timestamp'] = str(order.timestamp)
         if not order.is_done:     
             ordered_items = OrderedItem.objects.all().filter(order = order)
             for ordered_item in ordered_items:
