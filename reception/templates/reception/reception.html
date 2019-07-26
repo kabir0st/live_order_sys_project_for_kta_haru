@@ -18,7 +18,7 @@
 <body>
 
 <h1></h1>
-
+{{ orders }}
 <div class="container">
     {% for order in orders.order %}
 <div class="row">
@@ -31,7 +31,10 @@
         <tr><td>
             <span>{{ name }}</span>
             
-         </td></tr>   
+         </td>
+        <td>{{ order.table_number }}</td>
+        </tr>
+
        
         {% endfor %}
     </table>
@@ -42,16 +45,9 @@
     </div>
     {% endfor %}
     </div>
-</body>
+  </body>
 
 <script>
-
-function done(order_id)
-{
-    
-}
-
-</script>
 
 <script type="text/javascript">
     $(function(){

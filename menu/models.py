@@ -7,11 +7,15 @@ class CustomUser(AbstractUser):
 	uuid = models.UUIDField(unique = True,default = uuid.uuid4)
 	table_number = models.PositiveIntegerField(unique = True, null=True)
 
+	def __str__(self):
+		return str(self.table_number)
+
+
 class FoodType(models.Model):
 	food_type = models.CharField(max_length = 200,null = True)
 
 	def __str__(self):
-		return self.food_type
+		return str(self.food_type)
 
 
 class FoodItem(models.Model):
@@ -21,14 +25,15 @@ class FoodItem(models.Model):
 	is_active = models.BooleanField(default= True)
 
 	def __str__(self):
-		return self.name
+		return str(self.name)
 
 class Order(models.Model):
 	is_done = models.BooleanField(default=False)
 	timestamp = models.DateTimeField(default=timezone.now)
+	table_number = models.ForeignKey(CustomUser, blank = True, null = True, on_delete = models.SET_NULL)
 
 	def __str__(self):
-		return self.timestamp
+		return str(self.timestamp)
 	
 
 class OrderedItem(models.Model):
@@ -36,6 +41,5 @@ class OrderedItem(models.Model):
 	food_item = models.ForeignKey(FoodItem, on_delete = models.CASCADE)
 
 	def __str__(self):
-		return self.food_item
+		return str(self.food_item)
 	
-
