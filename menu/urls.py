@@ -2,5 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-   path('', views.home, name='home'),
+   path('',views.login_user, name="select table"),
+   path('<int:table_number>',views.home, name = "home")
+
 ]

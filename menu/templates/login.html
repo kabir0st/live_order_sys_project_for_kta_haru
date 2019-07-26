@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    {% load staticfiles %}
+  <!-- <link href="{% static 'assets/img/brand/favicon.png' %}" rel="icon" type="image/png"> -->
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <!-- Icons -->
+  <!-- <link href="{% static 'assets/vendor/nucleo/css/nucleo.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" rel="stylesheet"> -->
+  <!-- Argon CSS -->
+  <!-- <link type="text/css" href="{% static 'assets/css/argon.css' %}" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="{% static 'login/css/login.css' %}"> -->
+  <script type="text/javascript" src="{% static 'login/js/jsqrscanner.nocache.js' %}"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <div class="qrscanner flip" id="scanner">
+              </div>    
+            </div>
+          </div>
+          <div class="modal" id="scanned_output">
+            <div class="modal-content">
+                  <span class="cross">&times;</span>
+                  <div id = "output">
+  
+                  </div>
+              </div>
+            </div>
+          </div>
+    <button class="btn btn-danger" onclick="opencamera()">Use QR Code</button>
+
+    <!-- <script src="{% static 'assets/vendor/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'js/csrf.js' %}"></script> -->
+  
+    <!-- <script src="{% static 'assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script> -->
+    <script type="text/javascript" src="{% static 'login/js/login.js' %}"></script>
+  
+    <!-- Argon JS -->
+    <!-- <script src="{% static 'assets/js/argon.js' %}"></script> -->
+  
+</body>
+</html>

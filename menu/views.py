@@ -1,29 +1,35 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import FoodType, FoodItem, Order, OrderedItem, CustomUser
+from .models import FoodType, FoodItem, Order, OrderedItem, CustomUser, Table
 import json
 
-def home(request):
+def home(request,table_number):
 	if request.method == "POST":
 		json_str = request.body.decode(encoding= 'UTF-8')
 		data = json.loads(json_str)
 		names = data['name']
-		order = Order.objects.create()
+		table = Table.objects.get(table_number = int(table_number))
+		order = Order.objects.create(table_number = table)
 		for i in range(len(names)):
 			item = FoodItem.objects.get(name = names[i])
 			order_items = OrderedItem.objects.create(order = order, food_item = item)
 			order_items.save()
 		return HttpResponse("Ordered vayo vai")
 	else:
-		stealthedeal = FoodItem.objects.filter(food_type='7')
-		salad = FoodItem.objects.filter(food_type='8')
-		cornerbites = FoodItem.objects.filter(food_type='9')
-		mcf = FoodItem.objects.filter(food_type='10')
-		indiantadka = FoodItem.objects.filter(food_type='11')
-		pasta = FoodItem.objects.filter(food_type='12')
-		pizza = FoodItem.objects.filter(food_type='13')
-		bursand = FoodItem.objects.filter(food_type='14')
 		Food = FoodItem.objects.all
-		Foodtype = FoodType.objects.all
-		return render(request, 'home.html', {'Food': Food, 'Foodtype': Foodtype, 'stealthedeal':stealthedeal, 'salad':salad, 'cornerbites':cornerbites, 'mcf':mcf, 'indiantadka':indiantadka, 'pasta':pasta, 'pizza':pizza, 'bursand':bursand})
+		response_json = {'food_type':[], food:[]}
+		# for ( f in Food):
 
+		Foodtype = FoodType.objects.all
+		return render(request, 'home.html', {'response_json': response_json})
+
+def login_user(request):
+	if request.method == "POST":
+		json_str = request.body.decode(encoding= 'UTF-8')
+		data = json.loads(json_str)
+		uuid = data['uuid']
+		print(uuid)
+		table = Table.objects.get(uuid = uuid)
+		print(int(table.table_number))
+		return HttpResponse(int(table.table_number))
+	return render(request, 'login.html')

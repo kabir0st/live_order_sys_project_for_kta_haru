@@ -2,7 +2,8 @@
 
 
 {% block content %}
-    <div class="d-none d-lg-block sidebar-item make-me-sticky col-lg-3 col-md-3 text-white" id="sticky-sidebar">
+
+<div class="d-none d-lg-block sidebar-item make-me-sticky col-lg-3 col-md-3 text-white" id="sticky-sidebar">
         <ul style="list-style-type:none;padding-top: 80px; padding-bottom: 60px" class="text-left">
           <li><a href="#stealthedeal" class="js-scroll-trigger">Steal the Deal</a></li>
           <li><a href="#salad"  class="js-scroll-trigger">Salad</a></li>
@@ -15,127 +16,22 @@
         </ul>
     </div>
     <div class="content section col-lg-6 col-md-6" id="main">
-    <section id="stealthedeal">
-    <table class="table table-sm">
-       {% if stealthedeal %}
-       <tr>
-           <th class="text-white" colspan="2">Steal the Deal</th>
-       </tr>
-        {% for things in stealthedeal %}
-        <tr class="list-group-item-action text-white text-left" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}' )">
-            <td>{{ things.name }}</td>
-            <td class="text-right">Rs.{{ things.price }}</td>
-        </tr>
-        {% endfor %}{% endif %}
-    </table>
-    <br><br>
-    </section>
-    <section id="salad">
-    <table class="table table-sm" style="color: white">
-       {% if salad %}
-       <tr>
-           <th class="text-white" colspan="2">Salad</th>
-       </tr>
-        {% for things in salad %}
-        <tr class="list-group-item-action text-white text-left" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}' )">
-            <td>{{ things.name }}</td>
-            <td class="text-right">Rs.{{ things.price }}</td>
-        </tr>
-        {% endfor %}{% endif %}
-    </table>
-    <br><br>
-    </section>
-    <section id="cornerbites">
-    <table class="table table-sm " style="color: white">
-       {% if cornerbites %}
-       <tr>
-           <th class="text-white" colspan="2">Corner Bites</th>
-       </tr>
-        {% for things in cornerbites %}
-        <tr class="list-group-item-action text-white text-left" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}' )">
-            <td>{{ things.name }}</td>
-            <td class="text-right">Rs.{{ things.price }}</td>
-        </tr>
-        {% endfor %}{% endif %}
-    </table>
-    <br><br>
-    </section>
-    <section id="mcf">
-    <table class="table table-sm " style="color: white">
-       {% if mcf %}
-       <tr>
-           <th class="text-white" colspan="2">Mo:Mo / Chowmein & Fired Rice</th>
-       </tr>
-        {% for things in mcf %}
-        <tr class="list-group-item-action text-white text-left" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}' )">
-            <td>{{ things.name }}</td>
-            <td class="text-right">Rs.{{ things.price }}</td>
-        </tr>
-        {% endfor %}{% endif %}
-    </table>
-    <br><br>
-    </section>
+        <!-- <section id="stealthedeal">
+            <table class="table table-sm">
+                
+                <tr>
+                    <th class="text-white" colspan="2">Steal the Deal</th>
+                </tr>
+                
+                <tr class="list-group-item-action text-white text-left" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}' )">
+                    <td>{{ things.name }}</td>
+                    <td class="text-right">Rs.{{ things.price }}</td>
+                </tr>
+                
+            </table>
+        <br><br>
+        </section>                 -->
 
-    <section id="indiantadka">
-        <table class="table table-sm " style="color: white">
-       {% if indiantadka %}
-       <tr>
-           <th class="text-white" colspan="2">Indian Tadka</th>
-       </tr>
-        {% for things in indiantadka %}
-        <tr class="list-group-item-action text-white text-left" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}' )">
-            <td>{{ things.name }}</td>
-            <td class="text-right">Rs.{{ things.price }}</td>
-        </tr>
-        {% endfor %}{% endif %}
-    </table>
-    <br><br>
-    </section>
-    <section id="pasta">
-    <table class="table table-sm " style="color: white">
-       {% if pasta %}
-       <tr>
-           <th class="text-white" colspan="2">Pasta</th>
-       </tr>
-        {% for things in pasta %}
-        <tr class="list-group-item-action text-white text-left" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}' )">
-            <td>{{ things.name }}</td>
-            <td class="text-right">Rs.{{ things.price }}</td>
-        </tr>
-        {% endfor %}{% endif %}
-    </table>
-    <br><br>
-    </section>
-    <section id="pizza">
-    <table class="table table-sm " style="color: white">
-       {% if pizza %}
-       <tr>
-           <th class="text-white" colspan="2">Pizza</th>
-       </tr>
-        {% for things in pizza %}
-        <tr class="list-group-item-action text-white text-left" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}' )">
-            <td>{{ things.name }}</td>
-            <td class="text-right">Rs.{{ things.price }}</td>
-        </tr>
-        {% endfor %}{% endif %}
-    </table>
-    <br><br>
-    </section>
-    <section id="bursand">
-    <table class="table table-sm " style="color: white">
-       {% if bursand %}
-       <tr>
-           <th class="text-white" colspan="2">Burger / Sandwich</th>
-       </tr>
-        {% for things in bursand %}
-        <tr class="list-group-item-action text-white text-left" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}' )">
-            <td>{{ things.name }}</td>
-            <td class="text-right">Rs.{{ things.price }}</td>
-        </tr>
-        {% endfor %}{% endif %}
-    </table>
-    <br><br>
-    </section>
     </div>
 
     <div class="sidebar-item make-me-sticky col-lg-3 col-md-3">
@@ -150,9 +46,16 @@
        <button onclick="sendOrder()" class="btn btn-primary" style="margin-bottom: 50px;">
     Order</button>
     </div>
+<button onclick="create_menu()">Click me </button>
 
+    <script>
 
-    <script type="text/javascript">
+        $(document).ready(function () {
+        console.log("hero")
+        create_menu()
+        
+        });
+
     total_price = 0
     ordered_item = {'name':[], 'price':[] }
 
@@ -182,19 +85,16 @@
                 }
             })
         }
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    <script>
-    var closebtns = document.getElementsByClassName("close");
-    var i;
+        function create_menu()
+        {
+            data = "{{ Food }}"
+            console.log("Food")
+            console.log(data)
+        }
 
-    for (i = 0; i < closebtns.length; i++) {
-      closebtns[i].addEventListener("click", function() {
-        this.parentElement.style.display = 'none';
-      });
-    }
+
     </script>
+   
 </body>
 {% endblock %}
