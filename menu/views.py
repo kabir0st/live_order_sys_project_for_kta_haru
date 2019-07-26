@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import FoodType, FoodItem, Order, OrderedItem, CustomUser, Table
 import json
+import requests
 
 def home(request,table_number):
 	if request.method == "POST":
@@ -17,6 +18,27 @@ def home(request,table_number):
 		return HttpResponse("Ordered vayo vai")
 	else:
 		return render(request, 'home.html')
+	
+# rough implementation
+def pay_with_khalti(request):
+	if request.method == "POST":
+		json_str = request.body.decode(encoding= 'UTF-8')
+		data = json.loads(json_str)
+		url = "https://khalti.com/api/v2/payment/verify/"
+		payload = {
+		"token": data['token'],
+		"amount": int(data['amount'])
+		}
+		headers = {
+		"Authorization": "Key test_secret_key_36c4ba1d1af34d2c901a2a11493c16b3"
+		}
+		response = requests.post(url, payload, headers = headers)
+	
+	if (response == "<Response [200]>"):
+		return HttpResponse("1")
+	else:
+		return HttpResponse("0")
+	return HttpResponse("2")
 
 
 def get_menu(request):
@@ -25,12 +47,10 @@ def get_menu(request):
 	Foodtype = FoodType.objects.all()
 	for typename in Foodtype:
 		food_list[str(typename.food_type)] = {'name':[], 'price':[]}
-	print(food_list)
 	for f in Food :
 		if(f.is_active):
 			food_list[str(f.food_type)]['name'].append(str(f.name))
 			food_list[str(f.food_type)]['price'].append(str(f.price))
-	print(food_list)
 	return HttpResponse(json.dumps(food_list), content_type = 'application/json')	
 
 

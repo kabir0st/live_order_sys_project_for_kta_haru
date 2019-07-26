@@ -2,6 +2,8 @@
 
 
 {% block content %}
+<script src="https://khalti.com/static/khalti-checkout.js"></script>
+
 
 <div class="d-none d-lg-block sidebar-item make-me-sticky col-lg-3 col-md-3 text-white" id="sticky-sidebar">
         <ul style="list-style-type:none;padding-top: 80px; padding-bottom: 60px" class="text-left">
@@ -16,21 +18,6 @@
         </ul>
     </div>
     <div class="content section col-lg-6 col-md-6" id="main">
-        <!-- <section id="stealthedeal">
-            <table class="table table-sm">
-                
-                <tr>
-                    <th class="text-white" colspan="2">Steal the Deal</th>
-                </tr>
-                
-                <tr class="list-group-item-action text-white text-left" scope="row" onclick="add('{{ things.name }}', '{{  things.price }}' )">
-                    <td>{{ things.name }}</td>
-                    <td class="text-right">Rs.{{ things.price }}</td>
-                </tr>
-                
-            </table>
-        <br><br>
-        </section>                 -->
 
     </div>
 
@@ -46,7 +33,7 @@
        <button onclick="sendOrder()" class="btn btn-primary" style="margin-bottom: 50px;">
     Order</button>
     </div>
-<button onclick="create_menu()">Click me </button>
+    <button id="payment-button">Pay with Khalti</button>
 
     <script>
 
@@ -74,6 +61,11 @@
         function remove(order_item_id)
         {
             $("#"+order_item_id).remove();
+            ordered_item['name'].splice(order_item_id,1)
+            price = parseInt(ordered_item['price'])
+            ordered_item['price'].splice(order_item_id,1)
+            total_price = total_price - price
+            document.getElementById("total_price").innerHTML = total_price;
         }
         function sendOrder()
         {
@@ -119,7 +111,61 @@
                 }
             }
         }
+
+
+        var config = {
+        // replace the publicKey with yours
+        "publicKey": "test_public_key_7a2733a89fe04e07851792127b4e7daf",
+        "productIdentity": "khanakobill",
+        "productName": "foods",
+        "productUrl": " ",
+        "eventHandler": {
+            onSuccess (payload) {
+                verify(payload)
+                console.log(payload);
+            },
+            onError (error) {
+                console.log(error);
+            },
+            onClose () {
+                console.log('widget is closing');
+            }
+        }
+        };
+
+        var checkout = new KhaltiCheckout(config);
+        var btn = document.getElementById("payment-button");
+        btn.onclick = function () {
+            checkout.show({amount: total_price *100});
+        }
+        function verify(payload)
+        {
+            $.ajax ({
+                type: 'POST',
+                url: '/paywithkhalti',
+                data: JSON.stringify(payload),
+                success: function(data){
+                        if(data=="1")
+                        {
+                            //redirect to  popup success popup
+                            console.log(data)        
+                        }
+                        else{
+                             //redirect to  popup fail popup
+                             console.log(data)   
+                        }
+                    },
+                error: function(data){   
+                        //redirect to fail popup
+                        console.log(data) 
+                    }
+                })
+        }
     </script>
-   
+
+<script>
+    
+</script>
+
 </body>
 {% endblock %}
