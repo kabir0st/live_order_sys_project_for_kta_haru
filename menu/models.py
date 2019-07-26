@@ -5,10 +5,12 @@ import uuid
 
 class CustomUser(AbstractUser):
 	uuid = models.UUIDField(unique = True,default = uuid.uuid4)
-	table_number = models.PositiveIntegerField(unique = True, null=True)
+	is_manager = models.BooleanField(default= False)
+	is_reception = models.BooleanField(default= True)
+	passcode = models.IntegerField(default= 666)
 
 	def __str__(self):
-		return str(self.table_number)
+		return str(self.first_name)
 
 
 class FoodType(models.Model):
@@ -16,6 +18,13 @@ class FoodType(models.Model):
 
 	def __str__(self):
 		return str(self.food_type)
+
+class Table(models.Model):
+	table_number = models.PositiveIntegerField(unique = True, null=True)
+	uuid = models.UUIDField(unique = True,default = uuid.uuid4)
+	
+	def __str__(self):
+		return str(self.table_number)
 
 
 class FoodItem(models.Model):
@@ -30,7 +39,7 @@ class FoodItem(models.Model):
 class Order(models.Model):
 	is_done = models.BooleanField(default=False)
 	timestamp = models.DateTimeField(default=timezone.now)
-	table_number = models.ForeignKey(CustomUser, blank = True, null = True, on_delete = models.SET_NULL)
+	table_number = models.ForeignKey(Table, blank = True, null = True, on_delete = models.SET_NULL)
 
 	def __str__(self):
 		return str(self.timestamp)
