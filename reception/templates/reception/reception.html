@@ -40,7 +40,7 @@
     </table>
     <br><br><br><br>
     </div>
-    <a href="/reception/{{order.id}}" style="font-size: 100px; color: black;">X</a>
+    <button onclick="done('{{ order.id }}')">Done</button>
         
     </div>
     {% endfor %}
@@ -49,19 +49,37 @@
 
 <script>
 
-<script type="text/javascript">
-    $(function(){
-  var $curParent, Content;
-  $(document).delegate("span","click", function(){
-    if($(this).closest("s").length) {
-      Content = $(this).parent("s").html();
-      $curParent = $(this).closest("s");
-      $(Content).insertAfter($curParent);
-      $(this).closest("s").remove();
-    }
-    else {
-      $(this).wrapAll("<s />");
-    }
+  $(function(){
+    var $curParent, Content;
+    $(document).delegate("span","click", function(){
+      if($(this).closest("s").length) {
+        Content = $(this).parent("s").html();
+        $curParent = $(this).closest("s");
+        $(Content).insertAfter($curParent);
+        $(this).closest("s").remove();
+      }
+      else {
+        $(this).wrapAll("<s />");
+      }
+    });
   });
-});
+
+  function done(id)
+  {
+    id = parseInt(id)
+    console.log(id)
+    $.ajax ({
+            type: 'POST',
+            url: '/reception/done',
+            data: JSON.stringify(id),
+            success: function(data){
+                location.reload()        
+            },
+            error: function(data){
+                  console.log("Error")
+            }
+        })
+  }
+
+
 </script>

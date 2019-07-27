@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from menu.models import Order, OrderedItem
-
-
+import json
+from django.contrib.auth import login, logout
 
 def get_order(request):
     orders = Order.objects.all()
@@ -18,11 +18,20 @@ def get_order(request):
             response['order'].append(json_order)
     return render(request, 'reception/reception.html', {'orders': response})
 
-def order_done(request,id):
-    order = Order.objects.get(id=id)
-    order.is_done = True
-    order.save()
-    return HttpResponseRedirect("/reception")
+def order_done(request):
+    if request.method == "POST":
+        json_str = request.body.decode(encoding= 'UTF-8')
+        data = json.loads(json_str)
+        print(data)
+        order = Order.objects.get(id=int(data))
+        order.is_done = True
+        order.save()
+    return HttpResponse("Done")
 
-
+def login_user(request):
+    if request.method == "POST":
+        username = request.body['username']
+        password = request.body['password']
+        login(username,password)
+         
 
