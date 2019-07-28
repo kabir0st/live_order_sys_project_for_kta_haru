@@ -44,14 +44,9 @@
 
 <div class="d-none d-lg-block sidebar-item make-me-sticky col-lg-3 col-md-3 text-white" id="sticky-sidebar">
         <ul style="list-style-type:none;padding-top: 80px; padding-bottom: 60px" class="text-left">
-          <li><a href="#stealthedeal" class="js-scroll-trigger">Steal the Deal</a></li>
-          <li><a href="#salad"  class="js-scroll-trigger">Salad</a></li>
-          <li><a href="#cornerbites"  class="js-scroll-trigger">Corner Bites</a></li>
-          <li><a href="#mcf"  class="js-scroll-trigger">Mo:Mo / Chowmein & Fired Rice</a></li>
-          <li><a href="#indiantadka"  class="js-scroll-trigger">Indian Tadka</a></li>
-          <li><a href="#pasta"  class="js-scroll-trigger">Pasta</a></li>
-          <li><a href="#pizza"  class="js-scroll-trigger">Pizza</a></li>
-          <li><a href="#bursand"  class="js-scroll-trigger">Burger / Sandwich</a></li>
+          <div id="dynamic_menu">
+
+          </div>
         </ul>
     </div>
     <div class="content section col-lg-6 col-md-6" id="main">
@@ -137,6 +132,9 @@
         {
             for(var food_type in data)
             {
+              $("#dynamic_menu").append(
+                "<li><a href='#"+food_type+"'  class='js-scroll-trigger'>"+food_type+"</a></li>"
+              )
                 $("#main").append(
                     "<section id='"+food_type+"'><table class='table table-sm'><tbody id='food_data_"+food_type+"'><tr><th class='text-white' colspan='2'>"+food_type+"</th></tr></tbody></table><br><br></section>"     
                 );
@@ -282,4 +280,3 @@
     </div>
   </section>
   {% endblock %}
-
