@@ -20,5 +20,6 @@ from menu import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('menu.urls')),
-    path('reception',include('reception.urls'))
+    path('reception',include('reception.urls')),
+    path('adminpanel',include('adminpanel.urls'))
 ]
