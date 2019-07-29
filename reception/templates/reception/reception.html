@@ -1,50 +1,35 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-    <title>Restaurant Management System</title>
-</head>
-
+{% extends 'base.html' %}
+{% block content %}
 <body>
-
-<h1></h1>
-{{ orders }}
-<div class="container">
-    {% for order in orders.order %}
-<div class="row">
-<div class="col-2 col-md-2">   
-    <h1 style="font-size: 100px; padding-top: 0px">{{ order.id }}</h1>
-</div>
-<div class="col-9 col-md-9" style="padding-top: 20px;">
-    <table class="table table-borderless table-sm" style="padding-top: 20px;">
-        {% for name in order.name %}
-        <tr><td>
-            <span>{{ name }}</span>
-            
-         </td>
-        <td>{{ order.table_number }}</td>
-        </tr>
-
-       
-        {% endfor %}
-    </table>
-    <br><br><br><br>
-    </div>
-    <button onclick="done('{{ order.id }}')">Done</button>
+      <!-- Navigation -->
+      <nav class="navbar navbar-light fixed-top navbar-noscroll" id="mainNav">
+          <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">Reception</a>
+            </div>
+          </div>
+        </nav>
         
+<div class="container">
+    <div class="card-columns" style="padding-top:80px; padding-bottom:80px;">
+    {% for order in orders.order %}   
+      <div class="card">
+        <div class="card-body">  
+         <h5 class="card-title">{{ order.table_number }}</h5>
+         <p class="card-text"><small class="text-muted" >{{ order.timestamp | time }} <br> #{{ order.id }}</small></p>
+         <ol style="padding-left:20px">
+            {% for name in order.name %}
+            <li>{{ name }}</li>
+            {% endfor %}
+            </ol>
+            <button type="button" class="btn btn-primary btn-sm" onclick="done('{{ order.id }}')">Done</button>
+        </div>
+        
+      </div>
+      {% endfor %}
+      </div>
+            
     </div>
-    {% endfor %}
-    </div>
+  
   </body>
 
 <script>
@@ -83,3 +68,4 @@
 
 
 </script>
+{% endblock %}
