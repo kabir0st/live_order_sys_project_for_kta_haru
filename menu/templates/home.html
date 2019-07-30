@@ -104,7 +104,7 @@
             total_price = 0
             ordered_item = {
                 'name': [],
-                'price': []
+                'price': [],
             }
             order_item_id = 0
 
@@ -114,22 +114,29 @@
                 order_item_id += 1
                 total_price += parseInt(price)
                 $("#name").append(
-                    '<tr scope="row" class="list-group-item-action text-white text-left" onclick="remove(' + order_item_id + ')"  id = "' + order_item_id + '" ><td>' + name + '</td><td style="width: 10px;" class="text-right">Rs.' + price + '</td></tr>'
+                    '<tr scope="row" class="list-group-item-action text-white text-left" onclick="remove(' + order_item_id + ','+ "'" + name +"'" +')" id = "' + order_item_id + '" ><td>' + name + '</td><td style="width: 10px;" class="text-right">Rs.' + price + '</td></tr>'
                 );
                 document.getElementById("total_price").innerHTML = total_price;
             }
 
-            function remove(order_item_id) {
+            function remove(order_item_id, name ) {
                 $("#" + order_item_id).remove();
-                ordered_item['name'].splice(order_item_id, 1)
-                price = parseInt(ordered_item['price'])
-                ordered_item['price'].splice(order_item_id, 1)
-                total_price = total_price - price
+                price = 0
+                for(var i=0; i<(ordered_item['name'].length); i++)
+                {
+                    if(name == (ordered_item['name'][i]))
+                    {
+                        price = ordered_item['price'][i];
+                        ordered_item['name'].splice(i,1);
+                        ordered_item['price'].splice(i,1);
+                        break
+                    }
+                };
+                total_price = total_price - price           
                 document.getElementById("total_price").innerHTML = total_price;
             }
 
             function sendOrder() {
-                console.log(ordered_item)
                 $.ajax({
                     type: 'POST',
                     url: '',
@@ -148,8 +155,8 @@
                     success: function(data) {
                         outputData(data);
                     },
-                    error: function(data) {
-
+                    error: function(data) {    
+                        //error popup
                     }
                 })
 
@@ -165,7 +172,7 @@
                     );
                     for (i = 0; i < data[food_type].name.length; i++) {
                         $('#food_data_' + food_type).append(
-                            "<tr class='list-group-item-action text-white text-left' scope='row' onclick='add(" + '"' + data[food_type].name[i] + '"' + "," + '"' + data[food_type].price[i] + '"' + ")'><td>" + data[food_type].name[i] + "</td><td class='text-right'>Rs." + data[food_type].price[i] + "</td></tr>"
+                            "<tr class='list-group-item-action text-white text-left' scope='row' onclick='add(" + '"' + data[food_type].name[i] + '"' + "," + '"' + data[food_type].price[i] + '"' +")'><td>" + data[food_type].name[i] + "</td><td class='text-right'>Rs." + data[food_type].price[i] + "</td></tr>"
                         )
                     }
                 }
@@ -210,7 +217,7 @@
                             console.log(data)
                         } else {
                             //redirect to  popup fail popup
-                            console.log(data)
+                            
                         }
                     },
                     error: function(data) {
@@ -218,6 +225,10 @@
                         console.log(data)
                     }
                 })
+            }
+
+            function popup(){
+
             }
         </script>
 </body>
