@@ -142,7 +142,7 @@
                     url: '',
                     data: JSON.stringify(ordered_item),
                     success: function(data) {
-                        location.reload()
+                        if(!alert('Your Order has been place and will get to you shortly. Thank you!')){window.location.reload();}
                     }
                 })
             }
@@ -187,10 +187,10 @@
                 "eventHandler": {
                     onSuccess(payload) {
                         verify(payload)
-                        console.log(payload);
+                        // console.log(payload);
                     },
                     onError(error) {
-                        console.log(error);
+                        // console.log(error);
                     },
                     onClose() {
                         console.log('widget is closing');
@@ -212,18 +212,12 @@
                     url: '/paywithkhalti',
                     data: JSON.stringify(payload),
                     success: function(data) {
-                        if (data == "1") {
-                            //redirect to  popup success popup
-                            console.log(data)
-                        } else {
-                            //redirect to  popup fail popup
-                            
-                        }
-                    },
+                            sendOrder()
+                      },
                     error: function(data) {
                         //redirect to fail popup
-                        console.log(data)
-                    }
+                    alert("Payment Failed, Please Try Again Or Contact the Reception.")    
+                }
                 })
             }
 
