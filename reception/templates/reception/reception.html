@@ -23,36 +23,10 @@
             </ol>
             
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" class="btn btn-primary" onclick="done({{ order.id }})" data-target="#exampleModal">
                 Done
               </button>
               
-              <!-- Modal -->
-              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Is the order really served?</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">{{ order.table_number }}</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      {{ order.table_number }}
-                      <p class="card-text"><small class="text-muted" >{{ order.timestamp | time }} <br> #{{ order.id }}</small></p>
-                      <ol style="padding-left:20px">
-                          {% for name in order.name %}
-                          <li>{{ name }}</li>
-                          {% endfor %}
-                          </ol>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Oops</button>
-                      <button type="button" class="btn btn-primary" onclick="done('{{ order.id }}')">Yes! Done</button>
-                    </div>
-                  </div>
-                </div>
-            </div>
 
         </div>
       </div>
@@ -82,12 +56,13 @@
   function done(id)
   {
     id = parseInt(id)
+    console.log(id)
     $.ajax ({
             type: 'POST',
             url: '/reception/done',
             data: JSON.stringify(id),
             success: function(data){
-                location.reload()        
+              if(!alert('Your Order has been place and will get to you shortly. Thank you!')){window.location.reload();} 
             },
             error: function(data){
                   console.log("Error")
