@@ -34,4 +34,6 @@ def login_user(request):
         password = request.body['password']
         login(username,password)
          
+def get_new_order(request):
+    pass
 

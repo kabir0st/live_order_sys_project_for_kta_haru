@@ -82,10 +82,24 @@
   function done(id)
   {
     id = parseInt(id)
-    console.log(id)
     $.ajax ({
             type: 'POST',
             url: '/reception/done',
+            data: JSON.stringify(id),
+            success: function(data){
+                location.reload()        
+            },
+            error: function(data){
+                  console.log("Error")
+            }
+        })
+  }
+
+  function update_order()
+  {
+    $.ajax ({
+            type: 'POST',
+            url: '/reception/getneworder',
             data: JSON.stringify(id),
             success: function(data){
                 location.reload()        
