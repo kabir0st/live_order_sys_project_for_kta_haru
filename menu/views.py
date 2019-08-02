@@ -63,4 +63,4 @@ def login_user(request):
 		table = Table.objects.get(uuid = uuid)
 		print(int(table.table_number))
 		return HttpResponse(int(table.table_number))
-	return render(request, 'login.html')
+	return render(request, 'tablelogin.html')
