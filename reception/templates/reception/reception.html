@@ -5,11 +5,16 @@
       <nav class="navbar navbar-light fixed-top navbar-noscroll" id="mainNav">
           <div class="container">
             <a class="navbar-brand js-scroll-trigger" href="#page-top">Reception</a>
-            </div>
-          </div>
+            
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a class="nav-link js-scroll-trigger" href="/admin/logout/">Log Out</a>
+              </li>
+          </ul>
+        </div>
         </nav>
         
-<div class="container" style="height: 1080px;">
+<div class="container" style="height: 1080px; padding: 50px 0px 0px 0px;">
     <div class="card-columns" style="padding-top:80px; padding-bottom:80px;">
     {% for order in orders.order %}   
       <div class="card">
